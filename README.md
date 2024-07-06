@@ -89,10 +89,7 @@ package.json
 postcss.config.js
 tailwind.config.ts
 tsconfig.json
-Screenshots
-Landing Page
 
-Dashboard
 
 Getting Started
 Prerequisites
@@ -102,72 +99,17 @@ AstraDB Account
 AWS SES Account
 Stripe Account
 Installation
-Clone the repo:
-
-
-git clone https://github.com/your-username/Email-saas.git
+step1: Clone the repo:
+  git clone https://github.com/your-username/Email-saas.git
 cd Email-saas
-Install NPM packages:
-
-sh
-Copy code
+step2: Install NPM packages:
 npm install
-Set up environment variables:
+step3: Set up environment variables:
 Create a .env.local file in the root directory and add the necessary environment variables:
-
-plaintext
-Copy code
-DATABASE_URL=your_database_url
+ step 4: DATABASE_URL=your_database_url
 AWS_SES_ACCESS_KEY=your_aws_ses_access_key
 AWS_SES_SECRET_KEY=your_aws_ses_secret_key
 STRIPE_SECRET_KEY=your_stripe_secret_key
 Running the App
 To run the application in development mode:
-
-sh
-Copy code
 npm run dev
-Open http://localhost:3000 to view it in the browser.
-
-Deployment
-For deployment, you can use platforms like Vercel, Netlify, or any other cloud service provider that supports Next.js.
-
-License
-Distributed under the MIT License. See LICENSE for more information.
-
-Contact
-Your Name - your-email@example.com
-
-Project Link: https://github.com/your-username/saas-newsletter-platform
-
-go
-Copy code
-
-### Pushing to GitHub
-
-1. Initialize a new Git repository:
-    ```sh
-    git init
-    ```
-
-2. Add the files to the repository:
-    ```sh
-    git add .
-    ```
-
-3. Commit the changes:
-    ```sh
-    git commit -m "Initial commit"
-    ```
-
-4. Add the remote repository:
-    ```sh
-    git remote add origin https://github.com/your-username/Email-saas.git
-    ```
-
-5. Push the changes:
-    ```sh
-    git push -u origin main
-    ```
-
-Make sure to replace placeholders like `your-username` and
