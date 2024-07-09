@@ -24,7 +24,6 @@ const MailEditor = ({subjectTitle}: EmailEditorStringProps) => {
 
     unlayer?.exportHtml(async (data) => {
       const { design, html } = data;
-      setJsonData(design);
     })
   }
 
