@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^5.1.6",
     "@mui/x-data-grid": "^7.9.0",
     "@nextui-org/react": "^2.4.2",
+    "@stripe/stripe-js": "^4.1.0",
     "aws-sdk": "^2.1656.0",
     "framer-motion": "^11.2.10",
     "jotai": "^2.8.3",
@@ -26,6 +27,7 @@
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.7",
     "stargate-mongoose": "^0.6.2",
+    "stripe": "^16.2.0",
     "timeago.js": "^4.0.0-beta.3"
   },
   "devDependencies": {

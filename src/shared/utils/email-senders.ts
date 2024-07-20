@@ -3,14 +3,14 @@ import * as AWS from 'aws-sdk';
 import * as nodemails from 'nodemailer';
 
 interface Props {
-    userEmail: [],
+    userEmail: string[],
     subject: string,
-    context: string
+    content: string
 }
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
     region: "ap-south-1",
 });
 AWS.config.getCredentials(function (error) {
@@ -25,13 +25,13 @@ const adminMail = "billshahbscs@gmail.com";
 const transporter = nodemails.createTransport({
     SES: ses,
 });
-export const testMail = async (userEmail: Props) => {
+export const sendMail = async ( {userEmail, subject, content }: Props) => {
     try {
         const response:any = await transporter.sendMail({
             from: adminMail,
-            to: userEmail.userEmail,
-            subject: userEmail.subject,
-            html: userEmail.context
+            to: userEmail,
+            subject: subject,
+            html: content
         });
         return response?.messageId
             ? { ok: true }

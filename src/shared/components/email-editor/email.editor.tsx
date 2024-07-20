@@ -2,6 +2,7 @@
 import { GetEmailDetails } from '@/app/actions/getEmails.details';
 import { saveEmail } from '@/app/actions/save.email';
 import { DefaultJsonData } from '@/assets/mails/default';
+import { sendMail } from '@/shared/utils/email-senders';
 import { useClerk } from '@clerk/nextjs';
 import { Button } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
@@ -22,15 +23,24 @@ const MailEditor = ({subjectTitle}: EmailEditorStringProps) => {
   const exportHtml = () => {
     const unlayer = emailEditorRef.current?.editor;
 
-    unlayer?.exportHtml(async (data) => {
+    unlayer?.exportHtml(async (data:any) => {
       const { design, html } = data;
+      setJsonData(design)
+      await sendMail({
+        userEmail: ["bilalshahbscs@gmail.com"],
+        subject: subjectTitle,
+        content: html,
+      }).then((res) => {
+        toast.success("Email sent successfully!");
+        history.push("/dashboard/write");
+      });
     })
   }
 
   const saveDraft = () => {
     const unlayer = emailEditorRef.current?.editor;
 
-    unlayer?.exportHtml(async (data) => {
+    unlayer?.exportHtml(async (data:any) => {
       const { design } = data;
       await saveEmail({
         title: subjectTitle,
