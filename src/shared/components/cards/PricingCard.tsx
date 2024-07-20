@@ -1,9 +1,24 @@
+import { stripeSubscribe } from "@/app/actions/stripe.subscribe";
 import { GrowPlan, freePlan, scalePlan } from "@/app/configs/constant";
 import { ICONS } from "@/shared/utils/icons";
+import { useUser } from "@clerk/nextjs";
 import { Button } from "@nextui-org/button";
+import { useRouter } from "next/navigation";
 
 const PricingCard = ({ active }: { active: string }) => {
-  console.log(active,"active");
+
+
+  const { user } = useUser();
+  const history = useRouter();
+
+  const handleSubscription = async ({ price }: { price: string }) => {
+    await stripeSubscribe({ price, userId: user?.id! }).then(
+      (res: any) => {
+        history.push(res);
+      }
+    );
+  };
+
   const renderPlanFeatures = (plan: PlanType[]) =>
     plan.map((feature, index) => (
       <div key={index} className="flex w-full items-center py-4">
@@ -35,7 +50,24 @@ const PricingCard = ({ active }: { active: string }) => {
       </div>
       {renderPlanFeatures(features)}
       <br />
-      <Button color="primary" className="w-full text-xl !py-6">
+      <Button color="primary" className="w-full text-xl !py-6" onClick={() => {
+        if(title === 'Grow'){
+          handleSubscription({
+            price:
+              active === "Monthly"
+                ? "price_1PeeHzSAfkl2Kg8YQU04Aggg"
+                : "price_1PeeHzSAfkl2Kg8YQU04Aggg",
+          })
+        }
+        if(title === 'Scale'){
+          handleSubscription({
+            price:
+              active === "Monthly"
+                ? "price_1PeeJwSAfkl2Kg8YWJwZzES6"
+                : "price_1PeeJwSAfkl2Kg8YWJwZzES6",
+          })
+        }
+      }}>
         Get Started
       </Button>
       <p className="pt-1 opacity-[.7] text-center">{trialText}</p>
@@ -53,9 +85,9 @@ const PricingCard = ({ active }: { active: string }) => {
       )}
       {renderPlan(
         "Scale",
-        `$${active === "Monthly" ? "99" : "84"} /month`,
+        `$${active === "Monthly" ? "55" : "84"} /month`,
         scalePlan,
-        `30-day free trial of Scale features, then $${active === "Monthly" ? "99" : "84"}/mo`
+        `30-day free trial of Scale features, then $${active === "Monthly" ? "55" : "84"}/mo`
       )}
     </div>
   );
